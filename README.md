@@ -1,7 +1,7 @@
 # RoundTimer
 
 
- ####Status: On progress.
+ ### Status: On progress.
  
 React Native app that will provide the user a timer to help him control the length of martial arts/combat sports' sparrings/fights.
 
