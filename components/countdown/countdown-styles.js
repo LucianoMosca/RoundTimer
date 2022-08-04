@@ -9,12 +9,4 @@ export const CountDownText = styled.Text`
   margin: auto;
   margin-top: 40%;
 `;
-/*const styles = StyleSheet.create({
-    text: {
-      fontSize: sizes.xxxl,
-      fontWeight: 'bold',
-      color: colors.text,
-      padding: sizes.lg,
-      backgroundColor: colors.gum,
-    },
-  });*/
+

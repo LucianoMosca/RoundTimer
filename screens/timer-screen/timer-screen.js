@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Countdown } from "../../components/countdown/countdown";
 import { ThemeProvider } from "styled-components";
-import { theme } from "../../utils/theme";
+import { theme } from "../../infrastructure/theme";
 import { useKeepAwake } from "expo-keep-awake";
 import { TimerButton, ButtonText } from "./timer-screen-styles";
 import { Spacer } from "../../utils/spacer";
@@ -18,18 +18,20 @@ const PATTERN = [
   1 * ONE_SECOND_IN_MS,
 ];
 
+
 export const TimerScreen = ({ navigation, onTimerEnd }) => {
   useKeepAwake();
 
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
-  const [minutes, setMinutes] = useState(0.1);
+  const [minutes, setMinutes] = useState(0.2);
 
   const onEnd = () => {
-    Vibration.vibrate(PATTERN);
+   // Vibration.vibrate(PATTERN);
     setIsStarted(false);
-    setProgress(1);
-    onTimerEnd(null);
+    //setProgress(1);
+    setMinutes(0.1);
+    //onTimerEnd(null);
   };
 
   return (
@@ -42,16 +44,18 @@ export const TimerScreen = ({ navigation, onTimerEnd }) => {
           minutes={minutes}
           isPaused={!isStarted}
           onProgress={setProgress}
-          onEnd={onEnd}
+         onEnd={onEnd}
         ></Countdown>
         <Spacer position="top" size="xl">
-          <TimerButton>
-            <ButtonText>START</ButtonText>
+          
+          <TimerButton onPress={() => {!isStarted? setIsStarted(true) : setIsStarted(false)}}>
+          {!isStarted ?  <ButtonText >START</ButtonText> :  <ButtonText >PAUSE</ButtonText>}
+           
           </TimerButton>
         </Spacer>
         <Spacer position="top" size="xl">
-          <TimerButton>
-            <ButtonText>STOP</ButtonText>
+          <TimerButton onPress={() => onEnd()}>     
+            <ButtonText >STOP</ButtonText>
           </TimerButton>
         </Spacer>
       </View>

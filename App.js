@@ -1,7 +1,7 @@
 import React from "react";
 
 import { SafeArea } from "./utils/safeArea";
-import { theme } from "./utils/theme";
+import { theme } from "./infrastructure/theme";
 
 import styled, { ThemeProvider } from "styled-components";
 import { MainScreen } from "./screens/main-screen/main-screen";
@@ -15,7 +15,7 @@ export default function App() {
   return (
     <SafeArea>
       <Container theme ={theme}>     
-          <MainScreen/>
+          <TimerScreen/>
       </Container>
     </SafeArea>
   );

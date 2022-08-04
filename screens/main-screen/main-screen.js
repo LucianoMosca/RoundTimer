@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 
-import { theme } from "../../utils/theme";
+import { theme } from "../../infrastructure/theme";
 import { TimerCard } from "../../components/timer-card/timer-card";
 import { Spacer } from "../../utils/spacer";
 import { ThemeProvider } from "styled-components";
