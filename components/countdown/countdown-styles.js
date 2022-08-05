@@ -7,6 +7,6 @@ export const CountDownText = styled.Text`
   color: ${(props) => props.theme.colors.ui.error};
   background-color: ${(props) => props.theme.colors.ui.success};
   margin: auto;
-  margin-top: 40%;
+  margin-top: 10%;
 `;
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { CountDownText } from "./countdown-styles";
 
+//time formating
 const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
-export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
+
+//main functionality
+export const Countdown = ({ minutes , isPaused, onProgress, onEnd }) => {
   const interval = React.useRef(null);
 
   const [millis, setMillis] = useState(null);
@@ -14,11 +17,11 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 
   const countDown = () => {
     setMillis((time) => {
-      if (time === 0) {
-        setTimeout(() => clearInterval(interval.current), 0);
-        setTimeout(() => onEnd(reset), 0);
-
-        return time;
+        if (time === 0) {
+          setTimeout(() => clearInterval(interval.current), 0);
+          setTimeout(() => onEnd(reset), 0);
+  
+          return time;
       }
       const timeLeft = time - 1000;
       return timeLeft;
@@ -44,6 +47,7 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
+  //what the component renders
   const minute = Math.floor(millis / 1000 / 60) % 60;
   const seconds = Math.floor(millis / 1000) % 60;
   return (
