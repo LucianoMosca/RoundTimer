@@ -12,106 +12,130 @@ export const Timer = ({ navigation, onTimerEnd, round, rest, roundAmount }) => {
   const [isRestTime, setIsRestTime] = useState(null);
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(round);
+  const [isStopped, setIsStopped] = useState(null);
 
-  const phaseChange = () => {
-    setIsFightTime(!isFightTime);
-    setIsRestTime(!isRestTime);
-  };
-
+  //With this useEffect we make sure nothing wierd happens while mounting the component
   useEffect(() => {
     setMinutes(round);
-    setIsStarted(false);
+    setIsStarted(null);
+    setIsStopped(null);
   }, []);
 
- /* useEffect(() => {
-    if (isStarted) {
-      setIsFightTime(true);
-    }
-  }, [isStarted]);*/
+  // useEffect(() => {
+  //    if (isStarted && (isFightTime || isRestTime)) {
+  //     setIsPaused(false);
+  //   }
+  //  }, [isStarted]);
 
-  const onEnd = () => {
+  const onPhaseChange = () => {
     // Vibration.vibrate(PATTERN);
-    setIsStarted(false);
+    //setIsStarted(false);
     setProgress(1);
     setMinutes(round);
-    //phaseChange();
   };
-  console.log(isFightTime);
 
+  //Callback function that will mantain the fighting and resting rounds in a loop
   var roundAmount = roundAmount;
-
   const loop = () => {
-    if (roundAmount <= 0) {
-        return;
+    if (roundAmount <= 0 || isStopped) {
+      return;
     }
 
+    //fightTime
+    console.log("fightTime");  
+    setMinutes(round);
+    setIsFightTime(true);
+    setIsRestTime(false);
+
     setTimeout(() => {
-        setIsFightTime(true);
-        setIsRestTime(false);
+      //restTime
+      
 
-        setTimeout(() => {
+      if (isStopped) {
+        return;
+      }
 
-            setIsFightTime(false);
-            setIsRestTime(true);
+      console.log("restTime");
+      setMinutes(rest);
+      setIsFightTime(false);
+      setIsRestTime(true);
 
-            setTimeout(() => {
-                roundAmount -= 1;
+      if (isStopped) {
+        return;
+      }
+      setTimeout(() => {
+        roundAmount -= 1;
 
-                loop();
-            },1000 )
-        }, 13*1000 )
-    },7*1000);
+        loop();
+      },((60*rest)+1) * 1000);
+    }, ((60*round)+1) * 1000);
   };
 
-const theFunction = () => {
-   if(!isStarted){
-    loop();
+  //Function to call the loop() function
+  const theFunction = () => {
+    if (!isStarted) {
+      loop();
+      setIsStopped(false);
+      setIsStarted(true);
+       console.log("is stopped")
+    }
+  };
 
-    setIsStarted(true);
-   }  
-}
+  const theSecondFunction = () => {
+    setIsStopped(true);
+    setIsStarted(false);
 
+    console.log("is stopped")
+  };
 
-
-
+  //Below this line we will find three different Countdown components.
+  //The first one is just what the user will see when opening the TimerScreen
+  //The second one is rendered and activated when it's fight time
+  //While the last one will be rendered and activated when it's rest time.
   return (
     <View>
-      {isFightTime && 
+      {isStopped && (
+        <Countdown
+          minutes={round}
+          isPaused={true}
+          onProgress={setProgress}
+          onEnd={onPhaseChange}
+        ></Countdown>
+      )}
+
+      {!isStopped && isFightTime && (
         <Countdown
           minutes={round}
           isPaused={!isFightTime}
           onProgress={setProgress}
-          onEnd={onEnd}
+          onEnd={onPhaseChange}
         ></Countdown>
-      }
+      )}
 
-      {isRestTime && 
+      {!isStopped && isRestTime &&  (
         <Countdown
           minutes={rest}
           isPaused={!isRestTime}
           onProgress={setProgress}
-          onEnd={onEnd}
+          onEnd={onPhaseChange}
         ></Countdown>
-      }
+      )}
 
       <Spacer position="top" size="xl"></Spacer>
-      <TimerButton
-        onPress={() => {
-          !isStarted ? theFunction() : setIsStarted(false);
-        }}
-      >
-        {!isStarted ? (
-          <ButtonText>START</ButtonText>
-        ) : (
-          <ButtonText>PAUSE</ButtonText>
-        )}
-      </TimerButton>
 
-      <Spacer position="top" size="xl">
-        <TimerButton onPress={() => onEnd()}>
+      {!isStarted ? (
+        <TimerButton
+          onPress={() => {
+            theFunction();
+          }}
+        >
+          <ButtonText>START</ButtonText>
+        </TimerButton>
+      ) : (
+        <TimerButton onPress={() => theSecondFunction()}>
           <ButtonText>STOP</ButtonText>
         </TimerButton>
-      </Spacer>
+      )}
     </View>
   );
 };

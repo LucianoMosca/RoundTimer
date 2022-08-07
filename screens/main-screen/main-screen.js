@@ -22,9 +22,13 @@ export const MainScreen = ({navigation}) => {
 
    // <Pressable onPress={navigation.navigate("Timer")}>
     <ThemeProvider theme={theme}>
+      <Spacer position="top" size="xxl"></Spacer>
+      <Spacer position="top" size="xxl"></Spacer>
+
     <CardContainer>
+      
       <Spacer position="top" size="large">
-        <TimerCard elevation={4}></TimerCard>
+        <TimerCard elevation={4} round={3} rest={1}></TimerCard>
       </Spacer>
       <Spacer position="top" size="large">
         <TimerCard></TimerCard>

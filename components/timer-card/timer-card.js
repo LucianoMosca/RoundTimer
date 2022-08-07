@@ -9,26 +9,23 @@ import {
 } from "./timer-card-styles";
 
 //This will be the card component in which the user will see the timer set preview
-export const TimerCard = () => {
+export const TimerCard = (round, rest) => {
   return (
-   
+    <StyledCard mode={"elevated"} round={round} rest={rest}>
+      <CardContent>
+        <TimeContainer>
+          <Text>NOMBRE</Text>
+        </TimeContainer>
+        <TimeContainer>
+          <Text>03:00</Text>
+        </TimeContainer>
 
-      <StyledCard mode={"elevated"}>
-        <CardContent>
-          <TimeContainer>
-            <Text>NOMBRE</Text>
-          </TimeContainer>
-          <TimeContainer>
-            <Text>03:00</Text>
-          </TimeContainer>
-
-          <ButtonContainer>
-            <EditButton>
-              <Text>EDIT</Text>
-            </EditButton>
-          </ButtonContainer>
-        </CardContent>
-      </StyledCard>
-
+        <ButtonContainer>
+          <EditButton>
+            <Text> GO</Text>
+          </EditButton>
+        </ButtonContainer>
+      </CardContent>
+    </StyledCard>
   );
 };

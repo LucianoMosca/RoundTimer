@@ -5,20 +5,20 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "../../infrastructure/theme";
 import { useKeepAwake } from "expo-keep-awake";
 import { Timer } from "../../components/timer/timer";
+import { Spacer } from "../../utils/spacer";
 
-export const TimerScreen = ({ navigation, onTimerEnd }) => {
+
+export const TimerScreen = ({ navigation, round = 0.3, rest=0.1}) => {
   useKeepAwake();
-
-
   return (
     <ThemeProvider theme={theme}>
       <View>
         <Text>TimerScreen</Text>
       </View>
       <View>
-        <Timer round={0.2} rest={0.1} roundAmount={10}></Timer>
-
-        
+      <Spacer position="top" size="xxl"></Spacer>
+      <Spacer position="top" size="xxl"></Spacer>
+        <Timer round={round} rest={rest} roundAmount={10}></Timer>
       </View>
     </ThemeProvider>
   );
