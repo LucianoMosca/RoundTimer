@@ -9,20 +9,25 @@ import {
 } from "./timer-card-styles";
 
 //This will be the card component in which the user will see the timer set preview
-export const TimerCard = (round, rest) => {
+export const TimerCard = ({cardNameLabel, cardTimeLabel, navigation}) => {
+
+
+  const editPressHandler= () => {
+    navigation.navigate("Edit");
+  }
   return (
-    <StyledCard mode={"elevated"} round={round} rest={rest}>
+    <StyledCard mode={"elevated"}>
       <CardContent>
         <TimeContainer>
-          <Text>NOMBRE</Text>
+          <Text>{cardNameLabel}</Text>
         </TimeContainer>
         <TimeContainer>
-          <Text>03:00</Text>
+          <Text>{cardTimeLabel}</Text>
         </TimeContainer>
 
         <ButtonContainer>
-          <EditButton>
-            <Text> GO</Text>
+          <EditButton onPress={editPressHandler}>
+            <Text>EDIT</Text>
           </EditButton>
         </ButtonContainer>
       </CardContent>

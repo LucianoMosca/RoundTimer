@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text } from "react-native";
 import { Countdown } from "../../components/countdown/countdown";
 import { ThemeProvider } from "styled-components";
@@ -6,19 +6,19 @@ import { theme } from "../../infrastructure/theme";
 import { useKeepAwake } from "expo-keep-awake";
 import { Timer } from "../../components/timer/timer";
 import { Spacer } from "../../utils/spacer";
+import { TimerContext } from "../../infrastructure/context/timer-context";
 
-
-export const TimerScreen = ({ navigation, round = 0.3, rest=0.1}) => {
+export const TimerScreen = ({ navigation }) => {
   useKeepAwake();
+  const context = useContext(TimerContext)
+  
   return (
     <ThemeProvider theme={theme}>
-      <View>
-        <Text>TimerScreen</Text>
-      </View>
+      
       <View>
       <Spacer position="top" size="xxl"></Spacer>
       <Spacer position="top" size="xxl"></Spacer>
-        <Timer round={round} rest={rest} roundAmount={10}></Timer>
+        <Timer round={context.round} rest={context.rest} roundAmount={10} navigation={navigation}></Timer>
       </View>
     </ThemeProvider>
   );

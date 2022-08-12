@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { Countdown } from "../../components/countdown/countdown";
 import { useKeepAwake } from "expo-keep-awake";
-import { TimerButton, ButtonText } from "./timer-styles";
+import { StartButton, StopButton, ButtonText } from "./timer-styles";
 import { Spacer } from "../../utils/spacer";
 
-export const Timer = ({ navigation, onTimerEnd, round, rest, roundAmount }) => {
+export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   useKeepAwake();
   const [isStarted, setIsStarted] = useState(null);
   const [isFightTime, setIsFightTime] = useState(null);
@@ -72,7 +72,7 @@ export const Timer = ({ navigation, onTimerEnd, round, rest, roundAmount }) => {
   };
 
   //Function to call the loop() function
-  const theFunction = () => {
+  const startPressHandler = () => {
     if (!isStarted) {
       loop();
       setIsStopped(false);
@@ -81,11 +81,10 @@ export const Timer = ({ navigation, onTimerEnd, round, rest, roundAmount }) => {
     }
   };
 
-  const theSecondFunction = () => {
-    setIsStopped(true);
-    setIsStarted(false);
+ 
 
-    console.log("is stopped")
+  const stopPressHandler = () => {
+  navigation.navigate("Main");
   };
 
   //Below this line we will find three different Countdown components.
@@ -124,17 +123,15 @@ export const Timer = ({ navigation, onTimerEnd, round, rest, roundAmount }) => {
       <Spacer position="top" size="xl"></Spacer>
 
       {!isStarted ? (
-        <TimerButton
-          onPress={() => {
-            theFunction();
-          }}
+        <StartButton
+          onPress={startPressHandler}
         >
           <ButtonText>START</ButtonText>
-        </TimerButton>
+        </StartButton>
       ) : (
-        <TimerButton onPress={() => theSecondFunction()}>
+        <StopButton onPress={stopPressHandler}>
           <ButtonText>STOP</ButtonText>
-        </TimerButton>
+        </StopButton>
       )}
     </View>
   );

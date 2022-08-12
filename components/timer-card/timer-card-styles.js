@@ -33,6 +33,8 @@ export const CardContent = styled.View`
 
 export const TimeContainer = styled.View`
 justify-content: center;
+background-color: blue;
+width: 55px;
 
 `
 export const ButtonContainer = styled.View`
