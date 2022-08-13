@@ -10,15 +10,48 @@ import { TimerContext } from "../../infrastructure/context/timer-context";
 
 export const TimerScreen = ({ navigation }) => {
   useKeepAwake();
-  const context = useContext(TimerContext)
-  
+  const context = useContext(TimerContext);
+  console.log(context.name)
   return (
     <ThemeProvider theme={theme}>
-      
       <View>
-      <Spacer position="top" size="xxl"></Spacer>
-      <Spacer position="top" size="xxl"></Spacer>
-        <Timer round={context.round} rest={context.rest} roundAmount={10} navigation={navigation}></Timer>
+        <Spacer position="top" size="xxl"></Spacer>
+        <Spacer position="top" size="xxl"></Spacer>
+        
+        {context.name == "first" && (<Timer
+            round={context.first.round}
+            rest={context.first.rest}
+            roundAmount={10}
+            navigation={navigation}
+          ></Timer>)}
+
+          {context.name == "second" && (<Timer
+            round={context.second.round}
+            rest={context.second.rest}
+            roundAmount={10}
+            navigation={navigation}
+          ></Timer>)}  
+
+          {context.name == "third" && (<Timer
+            round={context.third.round}
+            rest={context.third.rest}
+            roundAmount={10}
+            navigation={navigation}
+          ></Timer>)}  
+
+           {context.name == "forth" && (<Timer
+            round={context.forth.round}
+            rest={context.forth.rest}
+            roundAmount={10}
+            navigation={navigation}
+          ></Timer>)}  
+          {context.name == "fifth" && (<Timer
+            round={context.fifth.round}
+            rest={context.fifth.rest}
+            roundAmount={10}
+            navigation={navigation}
+          ></Timer>)} 
+     
       </View>
     </ThemeProvider>
   );

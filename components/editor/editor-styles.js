@@ -11,13 +11,24 @@ export const ModifierButton = styled(TouchableOpacity)`
   justify-content: center;
 `;
 
+export const SaveButton = styled(TouchableOpacity)`
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  margin: auto;
+  margin-top: 5px;
+  justify-content: center;
+  align-items: center;
+
+`;
+
 export const EditButtonText = styled.Text`
 font-size: ${(props) => props.theme.fontSizes.button}
 align-self: center;
 `;
 
 export const EditContainer = styled.View`
-  flex: 1;
+  flex: 0.2;
   flex-direction: row;
   justify-content: center;
   align-items: center;
