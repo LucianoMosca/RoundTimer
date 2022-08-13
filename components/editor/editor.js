@@ -13,6 +13,8 @@ import {
 
 import { theme } from "../../infrastructure/theme";
 import { ThemeProvider } from "styled-components";
+import { EditContext } from "../../infrastructure/context/edit-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TimerContext } from "../../infrastructure/context/timer-context";
 
 export const Editor = ({ roundOrRest }) => {
@@ -31,7 +33,8 @@ export const Editor = ({ roundOrRest }) => {
   const [floatRound, setFloatRound] = useState(null);
   const [floatRest, setFloatRest] = useState(null);
 
-  const context = useContext(TimerContext);
+  const editContext = useContext(EditContext);
+  const timerContext = useContext(TimerContext);
   ////////////////////////////////////////////////////////////////////////
 
   //this function is to avoid getting a "1:0" format instead of the desired "01:00" format
@@ -97,49 +100,101 @@ export const Editor = ({ roundOrRest }) => {
   ////////////////////////////////////////////////////////////////////////
   //we will have to edit this, right now is just for testing purposes
   const savePressHandler = () => {
+    if (timerContext.name == "first") {
+      if (roundOrRest == "roundEdittor") {
+        setFloatRound(operation());
+        editContext.firstEditable.roundEdit = floatRound;
 
-    if (roundOrRest == "roundEdittor") {
-      setFloatRound(operation());
-      context.first.round = floatRound;
+        console.log(editContext.firstEditable.roundEdit);
+      }
+      if (roundOrRest == "restEdittor") {
+        setFloatRest(operation());
+        editContext.firstEditable.restEdit = floatRest;
 
-      console.log(context.first.round);
+        console.log(editContext.firstEditable.restEdit);
+      }
     }
 
-    if (roundOrRest == "restEdittor") {
-      setFloatRest(operation());
-      
-      context.first.rest = floatRest;
+    if (timerContext.name == "second") {
+      if (roundOrRest == "roundEdittor") {
+        setFloatRound(operation());
+        editContext.secondEditable.roundEdit = floatRound;
+
+        console.log(editContext.secondEditable.roundEdit);
+      }
+      if (roundOrRest == "restEdittor") {
+        setFloatRest(operation());
+        editContext.secondEditable.restEdit = floatRest;
+
+        console.log(editContext.secondEditable.restEdit);
+      }
     }
 
-    // context.first.round = edittableMinutes;
-    // context.first.rest = edittableSeconds;
+    if (timerContext.name == "third") {
+      if (roundOrRest == "roundEdittor") {
+        setFloatRound(operation());
+        editContext.thirdEditable.roundEdit = floatRound;
+
+        console.log(editContext.thirdEditable.roundEdit);
+      }
+      if (roundOrRest == "restEdittor") {
+        setFloatRest(operation());
+        editContext.thirdEditable.restEdit = floatRest;
+
+        console.log(editContext.thirdEditable.restEdit);
+      }
+    }
+    if (timerContext.name == "fourth") {
+      if (roundOrRest == "roundEdittor") {
+        setFloatRound(operation());
+        editContext.fourthEditable.roundEdit = floatRound;
+
+        console.log(editContext.fourthEditable.roundEdit);
+      }
+      if (roundOrRest == "restEdittor") {
+        setFloatRest(operation());
+        editContext.fourthEditable.restEdit = floatRest;
+
+        console.log(editContext.fourthEditable.restEdit);
+      }
+    }
   };
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@EditedTimer", jsonValue);
+    } catch (e) {
+      console.log("error while storing", e);
+    }
+  };
+
+  useEffect(() => {
+    storeData(editContext);
+  }, [editContext]);
+
   ////////////////////////////////////////////////////////////
   //everytime the edittableMinutes or edittableSeconds are changed we show the same change
   //in the stringMinutes or stringSeconds variables
   //We also modify the floatRound and floatRest variables
   useEffect(() => {
     setStringMinutes(pad(edittableMinutes));
-    if(roundOrRest == "roundEdittor"){
-        setFloatRound(operation());
-
+    if (roundOrRest == "roundEdittor") {
+      setFloatRound(operation());
     }
-    if(roundOrRest == "restEdittor"){
-        setFloatRest(operation());
-
+    if (roundOrRest == "restEdittor") {
+      setFloatRest(operation());
     }
   }, [edittableMinutes]);
 
   useEffect(() => {
     setStringSeconds(pad(edittableSeconds));
 
-    if(roundOrRest == "roundEdittor"){
-        setFloatRound(operation());
-
+    if (roundOrRest == "roundEdittor") {
+      setFloatRound(operation());
     }
-    if(roundOrRest == "restEdittor"){
-        setFloatRest(operation());
-
+    if (roundOrRest == "restEdittor") {
+      setFloatRest(operation());
     }
   }, [edittableSeconds]);
   //////////////////////////////////////////////////////////

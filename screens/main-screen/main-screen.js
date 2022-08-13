@@ -15,44 +15,48 @@ import { TimerCard } from "../../components/timer-card/timer-card";
 import { Spacer } from "../../utils/spacer";
 import { ThemeProvider } from "styled-components";
 import { CardContainer, TitleText, TitleContainer } from "./main-screen-styles";
+
 import { TimerContext } from "../../infrastructure/context/timer-context";
+import { EditContext } from "../../infrastructure/context/edit-context";
 
 export const MainScreen = ({ navigation }) => {
-  const context = useContext(TimerContext);
+
+  const timerContext = useContext(TimerContext);
+  const editContext = useContext(EditContext);
 
   const boxingPressHandler = () => {
-    context.first.round = 3;
-    context.first.rest = 1;
-    context.name = "first";
+    timerContext.first.round = editContext.firstEditable.roundEdit;
+    timerContext.first.rest = editContext.firstEditable.restEdit;
+    timerContext.name = "first";
 
     navigation.navigate("Timer");
   };
 
   const bjjPressHandler = () => {
-    context.second.round = 5;
-    context.second.rest = 1;
-    context.name = "second";
+    timerContext.second.round = editContext.secondEditable.roundEdit;
+    timerContext.second.rest = editContext.secondEditable.restEdit;
+    timerContext.name = "second";
 
     navigation.navigate("Timer");
   };
 
   const mmaPressHandler = () => {
-    context.third.round = 5;
-    context.third.rest = 1;
-    context.name = "third";
+    timerContext.third.round = editContext.thirdEditable.roundEdit;
+    timerContext.third.rest = editContext.thirdEditable.restEdit;
+    timerContext.name = "third";
 
     navigation.navigate("Timer");
   };
 
   const fourthPressHandler = () => {
-    context.third.round = 1;
-    context.third.rest = 0.3;
-    context.name = "third";
+    timerContext.fourth.round = editContext.fourthEditable.roundEdit;
+    timerContext.fourth.rest = editContext.fourthEditable.restEdit;
+    timerContext.name = "fourth";
 
     navigation.navigate("Timer");
   };
 
-  fourthPressHandler;
+ 
   return (
     <ThemeProvider theme={theme}>
       <Spacer position="top" size="xxl"></Spacer>
@@ -98,7 +102,7 @@ export const MainScreen = ({ navigation }) => {
         <Spacer position="top" size="large">
           <Pressable onPress={fourthPressHandler}>
             <TimerCard
-              cardPosition={"forth"}
+              cardPosition={"fourth"}
               elevation={4}
               cardNameLabel={"BJJ"}
               cardTimeLabel={"5x1"}

@@ -39,9 +39,9 @@ export const TimerScreen = ({ navigation }) => {
             navigation={navigation}
           ></Timer>)}  
 
-           {context.name == "forth" && (<Timer
-            round={context.forth.round}
-            rest={context.forth.rest}
+           {context.name == "fourth" && (<Timer
+            round={context.fourth.round}
+            rest={context.fourth.rest}
             roundAmount={10}
             navigation={navigation}
           ></Timer>)}  

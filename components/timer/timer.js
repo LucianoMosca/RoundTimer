@@ -28,19 +28,19 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   //  }, [isStarted]);
 
   const onPhaseChange = () => {
-    // Vibration.vibrate(PATTERN);
-    //setIsStarted(false);
+    //Vibration.vibrate(PATTERN);
+    
     setProgress(1);
     setMinutes(round);
   };
 
   //Callback function that will mantain the fighting and resting rounds in a loop
   var roundAmount = roundAmount;
+
   const loop = () => {
     if (roundAmount <= 0 || isStopped) {
-      return;
+      return ;
     }
-
     //fightTime
     console.log("fightTime");  
     setMinutes(round);
@@ -49,12 +49,9 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
 
     setTimeout(() => {
       //restTime
-      
-
       if (isStopped) {
         return;
       }
-
       console.log("restTime");
       setMinutes(rest);
       setIsFightTime(false);
@@ -65,7 +62,6 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
       }
       setTimeout(() => {
         roundAmount -= 1;
-
         loop();
       },((60*rest)+1) * 1000);
     }, ((60*round)+1) * 1000);
@@ -84,6 +80,9 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
  
 
   const stopPressHandler = () => {
+  setIsStopped(true);
+  setIsStarted(false);
+  roundAmount = 0;
   navigation.navigate("Main");
   };
 

@@ -12,7 +12,7 @@ export const TimerContextProvider = ({ children }) => {
         first: { round: round, rest: rest },
         second:{ round: round, rest: rest },
         third: { round: round, rest: rest },
-        forth: { round: round, rest: rest },
+        fourth: { round: round, rest: rest },
         name: name,
       }}
     >
