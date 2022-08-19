@@ -18,11 +18,11 @@ export default function App() {
   return (
     <SafeArea>
       <Container theme={theme}>
-        <EditContextProvider>
-          <TimerContextProvider>
+        <TimerContextProvider>
+          <EditContextProvider>
             <Navigation headerMode="none" />
-          </TimerContextProvider>
-        </EditContextProvider>
+          </EditContextProvider>
+        </TimerContextProvider>
       </Container>
     </SafeArea>
   );

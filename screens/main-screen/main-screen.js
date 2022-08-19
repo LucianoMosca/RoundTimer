@@ -25,8 +25,11 @@ export const MainScreen = ({ navigation }) => {
   const editContext = useContext(EditContext);
 
   const boxingPressHandler = () => {
-    timerContext.first.round = editContext.firstEditable.roundEdit;
-    timerContext.first.rest = editContext.firstEditable.restEdit;
+    console.log("this console log is in main screen" + editContext)
+   // timerContext.first.round = editContext.firstEditable.roundEdit;
+   // timerContext.first.rest = editContext.firstEditable.restEdit;
+
+    
     timerContext.name = "first";
 
     navigation.navigate("Timer");

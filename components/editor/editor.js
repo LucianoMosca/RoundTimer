@@ -158,20 +158,21 @@ export const Editor = ({ roundOrRest }) => {
         console.log(editContext.fourthEditable.restEdit);
       }
     }
-  };
 
-  const storeData = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@EditedTimer", jsonValue);
-    } catch (e) {
-      console.log("error while storing", e);
-    }
-  };
 
-  useEffect(() => {
+    const storeData = async (theValue) => {
+      try {
+        const jsonValue = JSON.stringify(theValue);
+        await AsyncStorage.setItem("value", jsonValue);
+        console.log(jsonValue);
+      } catch (e) {
+        console.log("error while storing", e);
+      }
+    };
     storeData(editContext);
-  }, [editContext]);
+  };
+
+  
 
   ////////////////////////////////////////////////////////////
   //everytime the edittableMinutes or edittableSeconds are changed we show the same change
