@@ -29,6 +29,7 @@ export const TimerCard = ({cardNameLabel, cardTimeLabel, navigation, cardPositio
         <TimeContainer>
           <Text>{cardTimeLabel}</Text>
         </TimeContainer>
+       
 
         <ButtonContainer>
           <EditButton onPress={editPressHandler}>

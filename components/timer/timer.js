@@ -39,7 +39,7 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   //  }, [isStarted]);
 
   const onPhaseChange = () => {
-    Vibration.vibrate(PATTERN);
+   // Vibration.vibrate(PATTERN);
     
     setProgress(1);
     setMinutes(round);

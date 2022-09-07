@@ -81,6 +81,7 @@ export const MainScreen = ({ navigation }) => {
               elevation={4}
               cardNameLabel={"BOXING"}
               cardTimeLabel={"3x1"}
+
               navigation={navigation}
             />
           </Pressable>
@@ -90,8 +91,9 @@ export const MainScreen = ({ navigation }) => {
             <TimerCard
               cardPosition={"second"}
               elevation={4}
-              cardNameLabel={"BJJ"}
+              cardNameLabel={"MMA"}
               cardTimeLabel={"5x1"}
+
               navigation={navigation}
             />
           </Pressable>
@@ -101,8 +103,9 @@ export const MainScreen = ({ navigation }) => {
             <TimerCard
               cardPosition={"third"}
               elevation={4}
-              cardNameLabel={"MMA"}
-              cardTimeLabel={"5x1"}
+              cardNameLabel={"ROOKIE"}
+              cardTimeLabel={"2x1"}
+
               navigation={navigation}
             />
           </Pressable>
@@ -113,8 +116,8 @@ export const MainScreen = ({ navigation }) => {
             <TimerCard
               cardPosition={"fourth"}
               elevation={4}
-              cardNameLabel={"BJJ"}
-              cardTimeLabel={"5x1"}
+              cardNameLabel={"INTENSITY"}
+              
               navigation={navigation}
             />
           </Pressable>
