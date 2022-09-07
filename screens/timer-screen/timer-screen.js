@@ -21,34 +21,34 @@ export const TimerScreen = ({ navigation }) => {
         {context.name == "first" && (<Timer
             round={context.first.round}
             rest={context.first.rest}
-            roundAmount={10}
+            roundAmount={100}
             navigation={navigation}
           ></Timer>)}
 
           {context.name == "second" && (<Timer
             round={context.second.round}
             rest={context.second.rest}
-            roundAmount={10}
+            roundAmount={100}
             navigation={navigation}
           ></Timer>)}  
 
           {context.name == "third" && (<Timer
             round={context.third.round}
             rest={context.third.rest}
-            roundAmount={10}
+            roundAmount={100}
             navigation={navigation}
           ></Timer>)}  
 
            {context.name == "fourth" && (<Timer
             round={context.fourth.round}
             rest={context.fourth.rest}
-            roundAmount={10}
+            roundAmount={100}
             navigation={navigation}
           ></Timer>)}  
           {context.name == "fifth" && (<Timer
             round={context.fifth.round}
             rest={context.fifth.rest}
-            roundAmount={10}
+            roundAmount={100}
             navigation={navigation}
           ></Timer>)} 
      

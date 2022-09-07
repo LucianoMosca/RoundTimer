@@ -10,13 +10,13 @@ export const TimerContextProvider = ({ children }) => {
   const name = "first";
 
   var value = {
-    first: { round: round, rest: rest },
-    second:{ round: round, rest: rest },
-    third: { round: round, rest: rest },
-    fourth: { round: round, rest: rest },
+    first: { round: 3, rest: 1 },
+    second:{ round: 5, rest: 1 },
+    third: { round: 2, rest: 2 },
+    fourth: { round: 0.5, rest: 0.2 },
     name: name,
   }
-
+/*
   function iterateObject(obj) {
     for (var prop in obj) {
       if (typeof obj[prop] == "object") {
@@ -97,11 +97,17 @@ export const TimerContextProvider = ({ children }) => {
      
     //getData("value");
   }, [AsyncStorage]);
-
+*/
 
   return (
     <TimerContext.Provider
-      value={value}
+      value={{
+        first: { round: 3, rest: 1 },
+        second:{ round: 5, rest: 1 },
+        third: { round: 2, rest: 2 },
+        fourth: { round: 0.5, rest: 0.2 },
+        name: name,
+      }}
     >
       {children}
     </TimerContext.Provider>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import {
   Text,
   View,
@@ -17,15 +19,19 @@ import { ThemeProvider } from "styled-components";
 import { CardContainer, TitleText, TitleContainer } from "./main-screen-styles";
 
 import { TimerContext } from "../../infrastructure/context/timer-context";
-import { EditContext } from "../../infrastructure/context/edit-context";
+//import { EditContext } from "../../infrastructure/context/edit-context";
 
 export const MainScreen = ({ navigation }) => {
 
   const timerContext = useContext(TimerContext);
-  const editContext = useContext(EditContext);
+  //const editContext = useContext(EditContext);
+
 
   const boxingPressHandler = () => {
-    console.log("this console log is in main screen" + editContext)
+
+
+
+    //console.log("this console log is in main screen" + editContext)
    // timerContext.first.round = editContext.firstEditable.roundEdit;
    // timerContext.first.rest = editContext.firstEditable.restEdit;
 
@@ -36,24 +42,24 @@ export const MainScreen = ({ navigation }) => {
   };
 
   const bjjPressHandler = () => {
-    timerContext.second.round = editContext.secondEditable.roundEdit;
-    timerContext.second.rest = editContext.secondEditable.restEdit;
+    // timerContext.second.round = editContext.secondEditable.roundEdit;
+    // timerContext.second.rest = editContext.secondEditable.restEdit;
     timerContext.name = "second";
 
     navigation.navigate("Timer");
   };
 
   const mmaPressHandler = () => {
-    timerContext.third.round = editContext.thirdEditable.roundEdit;
-    timerContext.third.rest = editContext.thirdEditable.restEdit;
+    // timerContext.third.round = editContext.thirdEditable.roundEdit;
+    // timerContext.third.rest = editContext.thirdEditable.restEdit;
     timerContext.name = "third";
 
     navigation.navigate("Timer");
   };
 
   const fourthPressHandler = () => {
-    timerContext.fourth.round = editContext.fourthEditable.roundEdit;
-    timerContext.fourth.rest = editContext.fourthEditable.restEdit;
+    // timerContext.fourth.round = editContext.fourthEditable.roundEdit;
+    // timerContext.fourth.rest = editContext.fourthEditable.restEdit;
     timerContext.name = "fourth";
 
     navigation.navigate("Timer");

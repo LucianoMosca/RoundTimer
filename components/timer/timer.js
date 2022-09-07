@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Vibration } from "react-native";
 import { Countdown } from "../../components/countdown/countdown";
 import { useKeepAwake } from "expo-keep-awake";
 import { StartButton, StopButton, ButtonText } from "./timer-styles";
 import { Spacer } from "../../utils/spacer";
 
+
+
+
 export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
+
+  const ONE_SECOND_IN_MS = 1000;
+  const PATTERN = [
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS,
+    1 * ONE_SECOND_IN_MS
+  ];
+
   useKeepAwake();
   const [isStarted, setIsStarted] = useState(null);
   const [isFightTime, setIsFightTime] = useState(null);
@@ -28,7 +39,7 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   //  }, [isStarted]);
 
   const onPhaseChange = () => {
-    //Vibration.vibrate(PATTERN);
+    Vibration.vibrate(PATTERN);
     
     setProgress(1);
     setMinutes(round);

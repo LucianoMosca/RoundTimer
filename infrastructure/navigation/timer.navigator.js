@@ -7,7 +7,7 @@ import {
 import { createAppContainer } from "react-navigation";
 import { MainScreen } from "../../screens/main-screen/main-screen";
 import { TimerScreen } from "../../screens/timer-screen/timer-screen";
-import { EditScreen } from "../../screens/edit-screen/edit-screen";
+//import { EditScreen } from "../../screens/edit-screen/edit-screen";
 
 const screens = {
   Main: {
@@ -15,9 +15,6 @@ const screens = {
   },
   Timer: {
     screen: TimerScreen
-  },
-  Edit: {
-    screen: EditScreen
   }
 }
 
