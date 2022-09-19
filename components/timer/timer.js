@@ -24,12 +24,17 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(round);
   const [isStopped, setIsStopped] = useState(null);
-
+  let unmounted = false;
   //With this useEffect we make sure nothing wierd happens while mounting the component
   useEffect(() => {
+
+   
     setMinutes(round);
     setIsStarted(null);
     setIsStopped(null);
+
+
+    return (() => { unmounted=true});
   }, []);
 
   // useEffect(() => {
@@ -53,38 +58,44 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
       return ;
     }
     //fightTime
-    console.log("fightTime");  
-    setMinutes(round);
-    setIsFightTime(true);
-    setIsRestTime(false);
-
-    setTimeout(() => {
-      //restTime
-      if (isStopped) {
-        return;
-      }
-      console.log("restTime");
-      setMinutes(rest);
-      setIsFightTime(false);
-      setIsRestTime(true);
-
-      if (isStopped) {
-        return;
-      }
+    if(!unmounted){
+      console.log("fightTime");  
+      setMinutes(round);
+      setIsFightTime(true);
+      setIsRestTime(false);
       setTimeout(() => {
-        roundAmount -= 1;
-        loop();
-      },((60*rest)+1) * 1000);
-    }, ((60*round)+1) * 1000);
+        //restTime
+        if(!unmounted){
+          console.log("restTime");
+          setMinutes(rest);
+          setIsFightTime(false);
+          setIsRestTime(true);
+    
+          
+          setTimeout(() => {
+            roundAmount -= 1;
+            loop();
+          },((60*rest)+1) * 1000);
+        }
+       
+      }, ((60*round)+1) * 1000);
+    }
+   
+
+    
   };
 
   //Function to call the loop() function
   const startPressHandler = () => {
     if (!isStarted) {
-      loop();
       setIsStopped(false);
       setIsStarted(true);
-       console.log("is stopped")
+    //  setTimeout(() => {
+        loop();
+       
+      
+     // }, 10 * 1000);
+    
     }
   };
 
@@ -101,6 +112,8 @@ export const Timer = ({ onTimerEnd, round, rest, roundAmount, navigation }) => {
   //The first one is just what the user will see when opening the TimerScreen
   //The second one is rendered and activated when it's fight time
   //While the last one will be rendered and activated when it's rest time.
+
+
   return (
     <View>
       {isStopped && (
