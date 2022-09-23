@@ -116,7 +116,7 @@ export const MainScreen = ({ navigation }) => {
             <TimerCard
               cardPosition={"fourth"}
               elevation={4}
-              cardNameLabel={"INTENSITY"}
+              cardNameLabel={"TEST"}
               
               navigation={navigation}
             />

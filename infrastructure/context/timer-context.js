@@ -13,7 +13,9 @@ export const TimerContextProvider = ({ children }) => {
     first: { round: 3, rest: 1 },
     second:{ round: 5, rest: 1 },
     third: { round: 2, rest: 1 },
-    fourth: { round: 0.6666, rest: 0.166666 },
+    //fourth: { round: 0.7, rest: 0.2 },
+    fourth: { round: 0.1, rest: 0.05 },
+
     name: name,
   }
 /*
@@ -101,13 +103,7 @@ export const TimerContextProvider = ({ children }) => {
 
   return (
     <TimerContext.Provider
-      value={{
-        first: { round: 3, rest: 1 },
-        second:{ round: 5, rest: 1 },
-        third: { round: 0.5, rest: 1 },
-        fourth: { round: 0.7, rest: 0.2 },
-        name: name,
-      }}
+      value={value}
     >
       {children}
     </TimerContext.Provider>
